@@ -21,15 +21,15 @@ def totals(rows):
     return count, price
 
 
-@transaction.atomic
 def place_order(customer, rows):
     if not rows:
         raise ValueError("Корзина пуста")
     _, total = totals(rows)
-    order = Order.objects.create(customer=customer, total=total)
-    OrderItem.objects.bulk_create([
-        OrderItem(order=order, name=product.name, price=product.price,
-                  quantity=quantity)
-        for product, quantity in rows
-    ])
+    with transaction.atomic():
+        order = Order.objects.create(customer=customer, total=total)
+        OrderItem.objects.bulk_create([
+            OrderItem(order=order, name=product.name, price=product.price,
+                      quantity=quantity)
+            for product, quantity in rows
+        ])
     return order
