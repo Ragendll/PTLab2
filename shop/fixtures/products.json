@@ -1,0 +1,38 @@
+[
+  {
+    "model": "shop.product",
+    "pk": 1,
+    "fields": {
+      "name": "Рислинг",
+      "description": "Белое сухое вино, 0,75 л.",
+      "price": "1050.00"
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 2,
+    "fields": {
+      "name": "Мерло",
+      "description": "Красное сухое вино, 0,75 л.",
+      "price": "1240.00"
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 3,
+    "fields": {
+      "name": "Брют",
+      "description": "Белое игристое вино, 0,75 л.",
+      "price": "1390.00"
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 4,
+    "fields": {
+      "name": "Сидр яблочный",
+      "description": "Полусухой сидр, 0,5 л.",
+      "price": "310.00"
+    }
+  }
+]

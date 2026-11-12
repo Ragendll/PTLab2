@@ -1,0 +1,30 @@
+{% extends "shop/base.html" %}
+{% block title %}Корзина — Винная полка{% endblock %}
+{% block content %}
+<h1>Корзина</h1>
+{% if rows %}
+  <ul class="cart">
+  {% for product, quantity in rows %}
+    <li>
+      <span>{{ product.name }} · {{ quantity }} шт. × {{ product.price }} ₽</span>
+      <form method="post" action="{% url 'add' product.pk %}">
+        {% csrf_token %}<button aria-label="Добавить одну единицу">+</button>
+      </form>
+      <form method="post" action="{% url 'remove' product.pk %}">
+        {% csrf_token %}<button aria-label="Убрать одну единицу">−</button>
+      </form>
+    </li>
+  {% endfor %}
+  </ul>
+  <p>Всего товаров: <strong>{{ count }}</strong>. Сумма: <strong>{{ total }} ₽</strong>.</p>
+  {% if user.is_authenticated %}
+    <form method="post" action="{% url 'checkout' %}">
+      {% csrf_token %}<button>Оформить покупку</button>
+    </form>
+  {% else %}
+    <a href="{% url 'login' %}?next={% url 'cart' %}">Войти для оформления</a>
+  {% endif %}
+{% else %}
+  <p>Корзина пуста.</p>
+{% endif %}
+{% endblock %}

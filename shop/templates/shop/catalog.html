@@ -1,0 +1,18 @@
+{% extends "shop/base.html" %}
+{% block content %}
+<h1>Каталог</h1>
+<div class="products">
+{% for product in products %}
+  <article>
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <p><strong>{{ product.price }} ₽</strong></p>
+    <form method="post" action="{% url 'add' product.pk %}">
+      {% csrf_token %}<button>В корзину</button>
+    </form>
+  </article>
+{% empty %}
+  <p>Товаров пока нет.</p>
+{% endfor %}
+</div>
+{% endblock %}

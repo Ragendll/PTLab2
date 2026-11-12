@@ -1,0 +1,19 @@
+{% extends "shop/base.html" %}
+{% block title %}Мои покупки — Винная полка{% endblock %}
+{% block content %}
+<h1>Мои покупки</h1>
+{% for order in orders %}
+  <article>
+    <h2>Заказ №{{ order.pk }}</h2>
+    <p>{{ order.created_at|date:"d.m.Y H:i" }}</p>
+    <ul>
+      {% for item in order.items.all %}
+        <li>{{ item.name }} · {{ item.quantity }} шт. × {{ item.price }} ₽</li>
+      {% endfor %}
+    </ul>
+    <p>Сумма: <strong>{{ order.total }} ₽</strong></p>
+  </article>
+{% empty %}
+  <p>У вас пока нет покупок.</p>
+{% endfor %}
+{% endblock %}

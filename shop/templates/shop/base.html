@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Винная полка{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'shop/style.css' %}">
+</head>
+<body>
+<header>
+  <nav>
+    <a class="brand" href="{% url 'catalog' %}">Винная полка</a>
+    <a href="{% url 'cart' %}">Корзина</a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'orders' %}">Мои покупки</a>
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}<button>Выйти</button>
+      </form>
+    {% else %}
+      <a href="{% url 'login' %}">Вход</a>
+      <a href="{% url 'register' %}">Регистрация</a>
+    {% endif %}
+  </nav>
+</header>
+<main>{% block content %}{% endblock %}</main>
+</body>
+</html>
